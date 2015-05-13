@@ -1,3 +1,6 @@
 /vendor
 /node_modules
 .env
+/access.log
+/error.log
+/public/phpmyadmin
