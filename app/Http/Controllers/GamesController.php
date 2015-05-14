@@ -21,7 +21,20 @@ class GamesController extends Controller {
         return view('games.show')->withGame($game);
     }
 
-    public function update($game) {
+    public function update($game, Request $request) {
+        if (!$request->has('door')) {
+            abort(400);
+        }
+        if (!$game->hasInitialChoice()) {
+            $game->initial_choice = $request->input('door');
+        }
+        else if (!$game->hasFinalChoice()) {
+            $game->final_choice = $request->input('door');
+        }
+        else {
+            abort(400);
+        }
+        $game->save();
         return redirect()->route('games.show', $game);
     }
 }
