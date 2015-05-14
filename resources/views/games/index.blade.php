@@ -6,5 +6,8 @@
         <input type="submit" value="New Game">
     </form>
     <hr>
-    ** list of games **
+    @foreach ($games as $game)
+        {{ $game }}
+        <br>
+    @endforeach
 @stop
