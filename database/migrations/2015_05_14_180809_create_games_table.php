@@ -10,10 +10,8 @@ class CreateGamesTable extends Migration {
      *
      * @return void
      */
-    public function up()
-    {
-        Schema::create('games', function(Blueprint $table)
-        {
+    public function up() {
+        Schema::create('games', function(Blueprint $table) {
             $table->increments('id');
             $table->enum('prize_door',     [1, 2, 3]);
             $table->enum('initial_choice', [1, 2, 3, 'NOT_MADE'])->default('NOT_MADE');
@@ -27,9 +25,7 @@ class CreateGamesTable extends Migration {
      *
      * @return void
      */
-    public function down()
-    {
+    public function down() {
         Schema::drop('games');
     }
-
 }

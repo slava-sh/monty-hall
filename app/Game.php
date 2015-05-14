@@ -12,19 +12,11 @@ class Game extends Model {
         });
     }
 
-    public function hasInitialChoice() {
-        return $this->initial_choice !== 'NOT_MADE';
-    }
-
-    public function hasFinalChoice() {
-        return $this->final_choice !== 'NOT_MADE';
-    }
-
     public function choose($door) {
-        if (!$this->hasInitialChoice()) {
+        if (is_null($this->initial_choice)) {
             $this->initial_choice = $door;
         }
-        else if (!$this->hasFinalChoice()) {
+        else if (is_null($this->final_choice)) {
             $this->final_choice = $door;
         }
         else {
