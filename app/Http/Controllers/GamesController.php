@@ -14,14 +14,14 @@ class GamesController extends Controller {
 
     public function create() {
         $game = Game::create([]);
-        return redirect()->route('games.show', [$game->id]);
+        return redirect()->route('games.show', $game);
     }
 
-    public function show($id) {
-        return view('games.show')->with('id', $id);
+    public function show($game) {
+        return view('games.show')->withGame($game);
     }
 
-    public function update($id) {
-        return redirect()->route('games.show', [$id]);
+    public function update($game) {
+        return redirect()->route('games.show', $game);
     }
 }
