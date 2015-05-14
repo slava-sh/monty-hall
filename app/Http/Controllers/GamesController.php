@@ -25,13 +25,7 @@ class GamesController extends Controller {
         if (!$request->has('door')) {
             abort(400);
         }
-        if (!$game->hasInitialChoice()) {
-            $game->initial_choice = $request->input('door');
-        }
-        else if (!$game->hasFinalChoice()) {
-            $game->final_choice = $request->input('door');
-        }
-        else {
+        if (!$game->choose($request->input('door'))) {
             abort(400);
         }
         $game->save();
