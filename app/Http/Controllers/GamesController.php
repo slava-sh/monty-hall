@@ -1,5 +1,6 @@
 <?php namespace App\Http\Controllers;
 
+use App\Game;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
@@ -12,7 +13,8 @@ class GamesController extends Controller {
     }
 
     public function create() {
-        return redirect()->route('games.show', [1]);
+        $game = Game::create([]);
+        return redirect()->route('games.show', [$game->id]);
     }
 
     public function show($id) {
@@ -20,6 +22,6 @@ class GamesController extends Controller {
     }
 
     public function update($id) {
-        return redirect()->route('games.show', [1]);
+        return redirect()->route('games.show', [$id]);
     }
 }
