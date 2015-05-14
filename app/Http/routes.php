@@ -11,7 +11,7 @@
 |
 */
 
-Route::get('/games', 'GameController@index');
-Route::post('/games', 'GameController@create');
-Route::get('/games/{id}', 'GameController@show');
-Route::put('/games/{id}', 'GameController@update');
+Route::get('/games',      ['as' => 'games.index',  'uses' => 'GamesController@index']);
+Route::post('/games',     ['as' => 'games.create', 'uses' => 'GamesController@create']);
+Route::get('/games/{id}', ['as' => 'games.show',   'uses' => 'GamesController@show']);
+Route::put('/games/{id}', ['as' => 'games.update', 'uses' => 'GamesController@update']);
