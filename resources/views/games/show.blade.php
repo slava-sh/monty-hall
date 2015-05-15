@@ -1,4 +1,4 @@
-@extends('layouts.master')
+@extends('app')
 
 @section('content')
     @if (is_null($game->final_choice))
