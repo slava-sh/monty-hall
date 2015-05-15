@@ -23,6 +23,10 @@ class Game extends Model {
         return $query->whereNotNull('final_choice');
     }
 
+    public function scopeNotFinished($query) {
+        return $query->whereNull('final_choice');
+    }
+
     public function scopeSwitched($query) {
         return $query->finished()->whereRaw('final_choice != initial_choice');
     }
@@ -39,15 +43,19 @@ class Game extends Model {
         return $query->finished()->whereRaw('final_choice != prize_door');
     }
 
+    // TODO: validation
     public function choose($door) {
         if (is_null($this->initial_choice)) {
             $this->initial_choice = $door;
-            $this->revealed_door = collect(range(1, 3))->reject(function($door) {
-                return $door === $this->prize_door ||
-                       $door === $this->initial_choice;
+            $this->revealed_door = collect(range(1, 3))->filter(function($door) {
+                return $door !== $this->prize_door &&
+                       $door !== $this->initial_choice;
             })->random();
         }
         else if (is_null($this->final_choice)) {
+            if ($door === $this->revealed_door) {
+                return false;
+            }
             $this->final_choice = $door;
         }
         else {
