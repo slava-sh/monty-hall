@@ -19,6 +19,26 @@ class Game extends Model {
         });
     }
 
+    public function scopeFinished($query) {
+        return $query->whereNotNull('final_choice');
+    }
+
+    public function scopeSwitched($query) {
+        return $query->finished()->whereRaw('final_choice != initial_choice');
+    }
+
+    public function scopeStayed($query) {
+        return $query->finished()->whereRaw('final_choice = initial_choice');
+    }
+
+    public function scopeWins($query) {
+        return $query->finished()->whereRaw('final_choice = prize_door');
+    }
+
+    public function scopeLosses($query) {
+        return $query->finished()->whereRaw('final_choice != prize_door');
+    }
+
     public function choose($door) {
         if (is_null($this->initial_choice)) {
             $this->initial_choice = $door;

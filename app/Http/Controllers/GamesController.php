@@ -9,7 +9,7 @@ use Illuminate\Http\Request;
 class GamesController extends Controller {
 
     public function index() {
-        return view('games.index')->with('games', Game::all());
+        return view('games.index')->with('games', Game::finished()->get());
     }
 
     public function create() {

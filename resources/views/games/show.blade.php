@@ -6,7 +6,12 @@
             <input type="hidden" name="_method" value="PUT">
             <input type="hidden" name="_token" value="{{ csrf_token() }}">
             @for ($door = 1; $door <= 3; ++$door)
-                <label><input type="radio" name="door" value="{{ $door }}" {{ $door === $game->revealed_door ? 'disabled' : '' }}>{{ $door }}</label>
+                <label>
+                    <input type="radio" name="door" value="{{ $door }}"
+                        {{ $door === $game->revealed_door  ? 'disabled' : '' }}
+                        {{ $door === $game->initial_choice ? 'checked'  : '' }}>
+                    {{ $door }}
+                </label>
             @endfor
             <input type="submit" value="Choose">
         </form>
