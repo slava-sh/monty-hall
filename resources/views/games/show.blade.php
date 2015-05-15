@@ -14,6 +14,9 @@
                 </label>
             @endfor
             <input type="submit" value="Choose">
+            @foreach ($errors->all() as $error)
+                <p>{{ $error }}</p>
+            @endforeach
         </form>
     @elseif ($game->final_choice === $game->prize_door)
         You win!

@@ -43,8 +43,11 @@ class Game extends Model {
         return $query->finished()->whereRaw('final_choice != prize_door');
     }
 
-    // TODO: validation
+    /*
+     * Does not validate the input.
+     */
     public function choose($door) {
+        $door = (int) $door;
         if (is_null($this->initial_choice)) {
             $this->initial_choice = $door;
             $this->revealed_door = collect(range(1, 3))->filter(function($door) {
@@ -53,14 +56,7 @@ class Game extends Model {
             })->random();
         }
         else if (is_null($this->final_choice)) {
-            if ($door === $this->revealed_door) {
-                return false;
-            }
             $this->final_choice = $door;
         }
-        else {
-            return false;
-        }
-        return true;
     }
 }

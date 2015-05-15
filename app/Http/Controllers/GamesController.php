@@ -35,12 +35,13 @@ class GamesController extends Controller {
     }
 
     public function update($game, Request $request) {
-        if (!$request->has('door')) {
-            abort(400);
-        }
-        if (!$game->choose($request->input('door'))) {
-            abort(400);
-        }
+        $pickable_doors = collect(range(1, 3))->filter(function($door) use ($game) {
+            return $door !== $game->revealed_door;
+        });
+        $this->validate($request, [
+            'door' => 'required|in:' . $pickable_doors->implode(','),
+        ]);
+        $game->choose($request->input('door'));
         $game->save();
         return redirect()->route('games.show', $game);
     }
