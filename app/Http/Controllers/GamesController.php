@@ -15,14 +15,14 @@ class GamesController extends Controller {
         $switch_percent          = Game::wins()            ->count() / $played_game_count        * 100;
         $win_percent_of_stayed   = Game::stayed()  ->wins()->count() / Game::stayed()  ->count() * 100;
         $win_percent_of_switched = Game::switched()->wins()->count() / Game::switched()->count() * 100;
-        return view('games.index')->with([
-            'played_game_count'       => $played_game_count,
-            'win_percent'             => $win_percent,
-            'stay_percent'            => $stay_percent,
-            'switch_percent'          => $switch_percent,
-            'win_percent_of_stayed'   => $win_percent_of_stayed,
-            'win_percent_of_switched' => $win_percent_of_switched,
-        ]);
+        return view('games.index')->with(compact([
+            'played_game_count',
+            'win_percent',
+            'stay_percent',
+            'switch_percent',
+            'win_percent_of_stayed',
+            'win_percent_of_switched',
+        ]));
     }
 
     public function create() {
