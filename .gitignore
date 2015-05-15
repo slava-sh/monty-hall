@@ -4,7 +4,9 @@
 /public/js
 /public/css
 /public/build
-.env
+/.env
+/compose.phar
+/logs
 /access.log
 /error.log
 /public/phpmyadmin
