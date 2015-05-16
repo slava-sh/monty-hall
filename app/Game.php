@@ -17,6 +17,11 @@ class Game extends Model {
         static::creating(function($game) {
             $game->prize_door = rand(1, 3);
         });
+
+        static::created(function($game) {
+            $game->slug = \Hashids::encode($game->id);
+            $game->save();
+        });
     }
 
     public function scopeFinished($query) {

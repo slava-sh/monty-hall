@@ -1,7 +1,8 @@
 {
   "require": {
     "laravel/framework": "5.0.*",
-    "doctrine/dbal": "~2.5"
+    "doctrine/dbal": "~2.5",
+    "vinkla/hashids": "~1.1"
   },
   "require-dev": {
     "phpunit/phpunit": "~4.0",
