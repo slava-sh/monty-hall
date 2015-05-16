@@ -20,7 +20,7 @@
                     {{ $door }}
                 </label>
             @endfor
-            <input type="submit" value="Choose">
+            <button type="submit">Choose</button>
             @foreach ($errors->all() as $error)
                 <p>{{ $error }}</p>
             @endforeach

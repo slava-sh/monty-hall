@@ -11,6 +11,6 @@
     </pre>
     <form action="{{ route('games.create') }}" method="POST">
         <input type="hidden" name="_token" value="{{ csrf_token() }}">
-        <input type="submit" value="New Game">
+        <button type="submit">New Game</button>
     </form>
 @stop
