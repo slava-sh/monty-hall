@@ -23,7 +23,12 @@ class RouteServiceProvider extends ServiceProvider {
     public function boot(Router $router) {
         parent::boot($router);
 
-        $router->model('game', 'App\Game');
+        $this->bind('game', function($slug) {
+            if ($game = \App\Game::findBySlug($slug)) {
+                return $game;
+            }
+            abort(404);
+        });
     }
 
     /**

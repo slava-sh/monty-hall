@@ -24,6 +24,14 @@ class Game extends Model {
         });
     }
 
+    public function getRouteKey() {
+        return $this->slug;
+    }
+
+    public static function findBySlug($slug) {
+        return static::whereSlug($slug)->first();
+    }
+
     public function scopeFinished($query) {
         return $query->whereNotNull('final_choice');
     }
