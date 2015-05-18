@@ -1,6 +1,4 @@
 {
   "name": "monty-hall",
-  "dependencies": {
-    "jquery": "~2.1.4"
-  }
+  "dependencies": {}
 }
