@@ -8,11 +8,9 @@
     <link href="{{ elixir('css/app.css') }}" rel="stylesheet">
 </head>
 <body>
-
-    <div style="width: 600px; margin: 50px auto;">
+    <div class="container">
         @yield('content')
     </div>
-
     <script src="{{ elixir('js/app.js') }}"></script>
 </body>
 </html>

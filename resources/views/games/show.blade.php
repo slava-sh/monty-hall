@@ -12,22 +12,50 @@
         <form action="{{ route('games.update', $game) }}" method="POST">
             <input type="hidden" name="_method" value="PUT">
             <input type="hidden" name="_token" value="{{ csrf_token() }}">
-            @for ($door = 1; $door <= 3; ++$door)
-                <label>
-                    <input type="radio" name="door" value="{{ $door }}"
-                        {{ $door === $game->revealed_door  ? 'disabled' : '' }}
-                        {{ $door === $game->initial_choice ? 'checked'  : '' }}>
-                    {{ $door }}
-                </label>
-            @endfor
+            <div class="door-container">
+                <?php $imgs = [ false => '/img/door-closed.svg', true => '/img/door-open.svg' ]; ?>
+                @foreach ($doors as $door)
+                    <label class="door">
+                        <img alt="Door {{ $door->number }}" src="{{ $imgs[$door->is_open] }}">
+                        <input type="radio" name="door" value="{{ $door->number }}"
+                            {{ $door->number === $game->revealed_door  ? 'disabled' : '' }}
+                            {{ $door->number === $game->initial_choice ? 'checked'  : '' }}>
+                    </label>
+                @endforeach
+            </div>
             <button type="submit">Choose</button>
             @foreach ($errors->all() as $error)
                 <p>{{ $error }}</p>
             @endforeach
         </form>
-    @elseif ($game->final_choice === $game->prize_door)
-        <h1>You win!</h1>
+        <script>
+            var form = document.querySelector('form');
+            var radios = form.querySelectorAll('input[type="radio"]');
+            for (var i = 0, radio; radio = radios[i]; ++i) {
+                radio.style.display = 'none';
+                if (!radio.disabled) {
+                    radio.addEventListener('click', function() {
+                        form.submit();
+                    });
+                    radio.parentNode.style.cursor = 'pointer';
+                }
+            }
+            form.querySelector('button[type="submit"]').style.display = 'none';
+        </script>
     @else
-        <h1>You lose!</h1>
+        @if ($game->final_choice === $game->prize_door)
+            <h1>You win!</h1>
+        @else
+            <h1>You lose!</h1>
+        @endif
+        <div class="door-container">
+            <?php $imgs = [ false => '/img/door-closed.svg', true => '/img/door-open.svg' ]; ?>
+            @foreach ($doors as $door)
+                <div class="door">
+                    <img alt="Door {{ $door->number }}" src="{{ $imgs[$door->is_open] }}">
+                </div>
+            @endforeach
+        </div>
+        <a href="{{ route('games.index') }}">index</a>
     @endif
 @stop

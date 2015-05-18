@@ -31,7 +31,15 @@ class GamesController extends Controller {
     }
 
     public function show($game) {
-        return view('games.show')->withGame($game);
+        $doors = [];
+        for ($i = 1; $i <= 3; ++$i) {
+            $doors[] = (object) [
+                'number'  => $i,
+                'is_open' => $i === $game->revealed_door ||
+                             $i === $game->final_choice,
+            ];
+        }
+        return view('games.show')->with(compact('game', 'doors'));
     }
 
     public function update($game, Request $request) {
