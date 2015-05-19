@@ -47,6 +47,8 @@
         @else
             <h1>You lose!</h1>
         @endif
+        @include('games.new-game-button', ['title' => 'Play Again'])
+        <a href="{{ route('games.index') }}">Home</a>
         <div class="door-container">
             @foreach ($doors as $door)
                 <div class="door">
@@ -54,6 +56,5 @@
                 </div>
             @endforeach
         </div>
-        <a href="{{ route('games.index') }}">index</a>
     @endif
 @stop
