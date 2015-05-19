@@ -1,6 +1,7 @@
-process.env.DISABLE_NOTIFIER = true;
-
 var elixir = require('laravel-elixir');
+
+process.env.DISABLE_NOTIFIER = true;
+elixir.config.sourcemaps = false;
 
 elixir(function(mix) {
     mix.less();

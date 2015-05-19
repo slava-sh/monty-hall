@@ -13,10 +13,9 @@
             <input type="hidden" name="_method" value="PUT">
             <input type="hidden" name="_token" value="{{ csrf_token() }}">
             <div class="door-container">
-                <?php $imgs = [ false => '/img/door-closed.svg', true => '/img/door-open.svg' ]; ?>
                 @foreach ($doors as $door)
                     <label class="door">
-                        <img alt="Door {{ $door->number }}" src="{{ $imgs[$door->is_open] }}">
+                        <img alt="Door {{ $door->number }}" src="{{ $door->image }}">
                         <input type="radio" name="door" value="{{ $door->number }}"
                             {{ $door->number === $game->revealed_door  ? 'disabled' : '' }}
                             {{ $door->number === $game->initial_choice ? 'checked'  : '' }}>
@@ -49,10 +48,9 @@
             <h1>You lose!</h1>
         @endif
         <div class="door-container">
-            <?php $imgs = [ false => '/img/door-closed.svg', true => '/img/door-open.svg' ]; ?>
             @foreach ($doors as $door)
                 <div class="door">
-                    <img alt="Door {{ $door->number }}" src="{{ $imgs[$door->is_open] }}">
+                    <img alt="Door {{ $door->number }}" src="{{ $door->image }}">
                 </div>
             @endforeach
         </div>

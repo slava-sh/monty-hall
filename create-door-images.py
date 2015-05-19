@@ -21,8 +21,29 @@ inner_x     = center_x - inner_w / 2
 inner_y     = padding_v + half_stroke
 ground_y    = inner_y + inner_h
 
-for door_is_open in [False, True]:
+for state in ['closed', 'win', 'lose']:
+    door_is_open = state != 'closed'
+
     dwg = Drawing(size=(ground_w, ground_y + half_stroke), style=drawing_style)
+
+    if state == 'win':
+        # rainbow
+        rainbow = dwg.g(fill='none')
+        rainbow.translate(center_x, ground_y + 20)
+        rainbow.scale(8)
+        rainbow.add(dwg.circle(r=19, style='stroke: #dd0000; stroke-width: 1.1'));
+        rainbow.add(dwg.circle(r=18, style='stroke: #fe6230; stroke-width: 1.1'));
+        rainbow.add(dwg.circle(r=17, style='stroke: #fef600; stroke-width: 1.1'));
+        rainbow.add(dwg.circle(r=16, style='stroke: #00bc00; stroke-width: 1.1'));
+        rainbow.add(dwg.circle(r=15, style='stroke: #009bfe; stroke-width: 1.1'));
+        rainbow.add(dwg.circle(r=14, style='stroke: #000083; stroke-width: 1.1'));
+        rainbow.add(dwg.circle(r=13, style='stroke: #30009b; stroke-width: 1.1'));
+
+        door_clip = dwg.defs.add(dwg.clipPath(id='door_clip'))
+        door_clip.add(dwg.rect((inner_x, inner_y), (inner_w, inner_h)))
+        rainbow_clipper = dwg.g(clip_path='url(#door_clip)')
+        rainbow_clipper.add(rainbow)
+        dwg.add(rainbow_clipper)
 
     # outer
     dwg.add(dwg.path(d=[['M', (inner_x - padding_v, inner_y - padding_h)],
@@ -39,7 +60,6 @@ for door_is_open in [False, True]:
     door = dwg.g()
     door.translate((inner_x, inner_y))
 
-    # handle
     if door_is_open:
         open_door = dwg.g()
         open_door.translate((inner_w - open_inner_w, 0))
@@ -53,6 +73,7 @@ for door_is_open in [False, True]:
         # handle
         open_door.add(dwg.line((open_handle_x, handle_relative_y - handle_size / 2),
                                (open_handle_x, handle_relative_y + handle_size / 2), style=handle_style))
+
         door.add(open_door)
     else:
         # inner
@@ -67,4 +88,4 @@ for door_is_open in [False, True]:
     dwg.add(dwg.line((0, ground_y), (vertical_space, ground_y)))
     dwg.add(dwg.line((ground_w - vertical_space, ground_y), (ground_w, ground_y)))
 
-    dwg.saveas('public/img/door-{}.svg'.format('open' if door_is_open else 'closed'))
+    dwg.saveas('public/img/door-{}.svg'.format(state))

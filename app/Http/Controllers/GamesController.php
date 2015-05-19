@@ -33,12 +33,21 @@ class GamesController extends Controller {
     public function show($game) {
         $doors = [];
         for ($i = 1; $i <= 3; ++$i) {
+            if ($i === $game->final_choice) {
+                $door_state = $game->final_choice === $game->prize_door ? 'win' : 'lose';
+            }
+            else if ($i === $game->revealed_door) {
+                $door_state = 'lose';
+            }
+            else {
+                $door_state = 'closed';
+            }
             $doors[] = (object) [
-                'number'  => $i,
-                'is_open' => $i === $game->revealed_door ||
-                             $i === $game->final_choice,
+                'number' => $i,
+                'image'  => asset('img/door-' . $door_state . '.svg'),
             ];
         }
+        $game->testzzz = true;
         return view('games.show')->with(compact('game', 'doors'));
     }
 
