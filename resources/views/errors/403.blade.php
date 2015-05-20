@@ -1,1 +1,3 @@
-@include('errors.404', ['status' => 403])
+@extends('errors.4xx')
+
+@section('status', 403)
