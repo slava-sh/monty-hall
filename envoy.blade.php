@@ -23,7 +23,7 @@
 
     npm install --quiet
     ./node_modules/.bin/bower install --quiet
-    ./node_modules/.bin/gulp
+    ./node_modules/.bin/gulp --production
 
     php artisan up
 @endtask
