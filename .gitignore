@@ -1,3 +1,4 @@
+/.vagrant
 /vendor
 /node_modules
 /bower_components
@@ -5,8 +6,6 @@
 /public/css
 /public/build
 /.env
-/compose.phar
-/logs
-/access.log
-/error.log
+/composer.phar
 /public/phpmyadmin
+/logs
