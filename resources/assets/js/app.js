@@ -27,6 +27,6 @@ App.controller('games.show', function() {
                 radio.parentNode.style.cursor = 'pointer';
             }
         }
-        gameForm.querySelector('button[type="submit"]').style.display = 'none';
+        gameForm.querySelector('input[type="submit"]').style.display = 'none';
     }
 });

@@ -22,7 +22,7 @@
                     </label>
                 @endforeach
             </div>
-            <button type="submit">Choose</button>
+            <input type="submit" value="Choose">
             @foreach ($errors->all() as $error)
                 <p>{{ $error }}</p>
             @endforeach
