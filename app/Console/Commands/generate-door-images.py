@@ -1,4 +1,7 @@
+import sys
 from svgwrite import *
+
+directory = sys.argv[1]
 
 drawing_style     = 'stroke-width: 4; stroke: black; stroke-linecap: round; stroke-linejoin: round'
 inner_w           = 130
@@ -87,4 +90,4 @@ for state in ['closed', 'win', 'lose']:
     dwg.add(dwg.line((0, ground_y), (vertical_space, ground_y)))
     dwg.add(dwg.line((ground_w - vertical_space, ground_y), (ground_w, ground_y)))
 
-    dwg.saveas('public/img/door-{}.svg'.format(state))
+    dwg.saveas('{}/door-{}.svg'.format(directory, state))
