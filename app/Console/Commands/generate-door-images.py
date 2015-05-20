@@ -3,6 +3,9 @@ from svgwrite import *
 
 directory = sys.argv[1]
 
+outer_color = '#aaa'
+inner_color = '#ddd'
+
 drawing_style     = 'stroke-width: 4; stroke: black; stroke-linecap: round; stroke-linejoin: round'
 inner_w           = 130
 inner_h           = 280
@@ -57,7 +60,7 @@ for state in ['closed', 'win', 'lose']:
                         ['v',  inner_h],
                         ['h', -padding_h],
                         ['z']],
-                     fill='#898989'))
+                     fill=outer_color))
 
     door = dwg.g()
     door.translate((inner_x, inner_y))
@@ -71,7 +74,7 @@ for state in ['closed', 'win', 'lose']:
                                   ['v', inner_h],
                                   ['h', -open_inner_w],
                                   ['z']],
-                               fill='#d6d6d6'))
+                               fill=inner_color))
         # handle
         open_door.add(dwg.line((open_handle_x, handle_relative_y - handle_size / 2),
                                (open_handle_x, handle_relative_y + handle_size / 2)))
@@ -79,7 +82,7 @@ for state in ['closed', 'win', 'lose']:
         door.add(open_door)
     else:
         # inner
-        door.add(dwg.rect((0, 0), (inner_w, inner_h), fill='#d6d6d6'))
+        door.add(dwg.rect((0, 0), (inner_w, inner_h), fill=inner_color))
         # handle
         door.add(dwg.line((handle_relative_x, handle_relative_y - handle_size / 2),
                           (handle_relative_x, handle_relative_y + handle_size / 2)))
