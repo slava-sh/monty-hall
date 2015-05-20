@@ -7,7 +7,7 @@
     <link href="//cdnjs.cloudflare.com/ajax/libs/normalize/3.0.3/normalize.min.css" rel="stylesheet">
     <link href="{{ elixir('css/app.css') }}" rel="stylesheet">
 </head>
-<body>
+<body id="{{ $page_id }}">
     <div class="container">
         @yield('content')
     </div>
