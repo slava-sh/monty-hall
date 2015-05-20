@@ -1,6 +1,6 @@
 from svgwrite import *
 
-drawing_style     = 'stroke-width: 3; stroke: black; stroke-linecap: round; stroke-linejoin: round'
+drawing_style     = 'stroke-width: 4; stroke: black; stroke-linecap: round; stroke-linejoin: round'
 inner_w           = 130
 inner_h           = 280
 padding_h         = 16
@@ -9,7 +9,6 @@ vertical_space    = 40
 handle_relative_x = 14
 handle_relative_y = inner_h / 2
 handle_size       = 30
-handle_style      = 'stroke-width: 4'
 open_inner_w      = 36
 open_inner_crack  = 10
 open_handle_x     = 7
@@ -72,7 +71,7 @@ for state in ['closed', 'win', 'lose']:
                                fill='#d6d6d6'))
         # handle
         open_door.add(dwg.line((open_handle_x, handle_relative_y - handle_size / 2),
-                               (open_handle_x, handle_relative_y + handle_size / 2), style=handle_style))
+                               (open_handle_x, handle_relative_y + handle_size / 2)))
 
         door.add(open_door)
     else:
@@ -80,7 +79,7 @@ for state in ['closed', 'win', 'lose']:
         door.add(dwg.rect((0, 0), (inner_w, inner_h), fill='#d6d6d6'))
         # handle
         door.add(dwg.line((handle_relative_x, handle_relative_y - handle_size / 2),
-                          (handle_relative_x, handle_relative_y + handle_size / 2), style=handle_style))
+                          (handle_relative_x, handle_relative_y + handle_size / 2)))
 
     dwg.add(door)
 
