@@ -9,7 +9,7 @@
             <h1>You Picked the {{ ['', 'First', 'Second', 'Third'][$game->initial_choice] }} Door</h1>
             <p>I opened one losing door for you. Now you can either stay with your choice or switch.</p>
         @endif
-        <form action="{{ route('games.update', $game) }}" method="POST">
+        <form id="game" action="{{ route('games.update', $game) }}" method="POST">
             <input type="hidden" name="_method" value="PUT">
             <input type="hidden" name="_token" value="{{ csrf_token() }}">
             <div class="door-container">
