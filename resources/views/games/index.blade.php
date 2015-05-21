@@ -1,11 +1,12 @@
-@extends('layouts.master')
+@extends('layouts.game')
 
 @section('title', 'Monty Hall Game')
 
-@section('content')
-
+@section('game.buttons')
     @include('games.new-game-button', ['title' => 'Play'])
+@stop
 
+@section('game.body')
     <div class="statistics">
         <p><strong>{{ $played_game_count }}</strong> games played.</p>
         <p><strong>{{ sprintf('%.0f', $switch_rate) }}%</strong> of players switched.</p>

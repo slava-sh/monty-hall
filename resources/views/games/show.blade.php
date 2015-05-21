@@ -34,7 +34,7 @@
         <a href="{{ route('games.index') }}">Switch</a>
     @else
         @include('games.new-game-button', ['title' => 'Play Again'])
-        <a href="{{ route('games.index') }}">Play Again</a>
+        <a href="{{ route('games.index') }}">Statistics</a>
     @endif
 @stop
 
