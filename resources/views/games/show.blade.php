@@ -30,8 +30,6 @@
 @section('game.buttons')
     @if (is_null($game->final_choice) && is_null($game->initial_choice))
     @elseif (is_null($game->final_choice))
-        <a href="{{ route('games.index') }}">Stay</a>
-        <a href="{{ route('games.index') }}">Switch</a>
     @else
         @include('games.new-game-button', ['title' => 'Play Again'])
         <a href="{{ route('games.index') }}">Statistics</a>
