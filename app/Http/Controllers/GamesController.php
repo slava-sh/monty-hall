@@ -9,19 +9,15 @@ use Illuminate\Http\Request;
 class GamesController extends Controller {
 
     public function index() {
-        $played_game_count       = Game::finished()->count();
-        $win_percent             = self::percent(Game::stayed()          ->count(), $played_game_count);
-        $stay_percent            = self::percent(Game::switched()        ->count(), $played_game_count);
-        $switch_percent          = self::percent(Game::wins()            ->count(), $played_game_count);
-        $win_percent_of_stayed   = self::percent(Game::stayed()  ->wins()->count(), Game::stayed()  ->count());
-        $win_percent_of_switched = self::percent(Game::switched()->wins()->count(), Game::switched()->count());
+        $played_game_count = Game::finished()->count();
+        $switch_rate       = self::percent(Game::wins()            ->count(), $played_game_count);
+        $stay_win_rate     = self::percent(Game::stayed()  ->wins()->count(), Game::stayed()  ->count());
+        $switch_win_rate   = self::percent(Game::switched()->wins()->count(), Game::switched()->count());
         return view('games.index')->with(compact([
             'played_game_count',
-            'win_percent',
-            'stay_percent',
-            'switch_percent',
-            'win_percent_of_stayed',
-            'win_percent_of_switched',
+            'switch_rate',
+            'stay_win_rate',
+            'switch_win_rate',
         ]));
     }
 

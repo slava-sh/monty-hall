@@ -4,14 +4,15 @@
 
 @section('content')
 
-<!--
-    {{ $played_game_count }} games played
-    {{ sprintf('%5.2f', $win_percent)             }}% won
-    {{ sprintf('%5.2f', $stay_percent)            }}% stayed
-    {{ sprintf('%5.2f', $switch_percent)          }}% switched
-    {{ sprintf('%5.2f', $win_percent_of_stayed)   }}% of those who stayed won
-    {{ sprintf('%5.2f', $win_percent_of_switched) }}% of those who switched won
--->
-
     @include('games.new-game-button', ['title' => 'Play'])
+
+    <div class="statistics">
+        <p><strong>{{ $played_game_count }}</strong> games played.</p>
+        <p><strong>{{ sprintf('%.0f', $switch_rate) }}%</strong> of players switched.</p>
+        <table>
+            <tr><td><strong>Stayers</strong></td>  <td>win in <strong>{{ sprintf('%.0f', $stay_win_rate)   }}%</strong> of cases.</td></tr>
+            <tr><td><strong>Switchers</strong></td><td>win in <strong>{{ sprintf('%.0f', $switch_win_rate) }}%</strong> of cases.</td></tr>
+        </table>
+    </div>
+
 @stop
