@@ -10,11 +10,11 @@ class GamesController extends Controller {
 
     public function index() {
         $played_game_count       = Game::finished()->count();
-        $win_percent             = Game::stayed()          ->count() / $played_game_count        * 100;
-        $stay_percent            = Game::switched()        ->count() / $played_game_count        * 100;
-        $switch_percent          = Game::wins()            ->count() / $played_game_count        * 100;
-        $win_percent_of_stayed   = Game::stayed()  ->wins()->count() / Game::stayed()  ->count() * 100;
-        $win_percent_of_switched = Game::switched()->wins()->count() / Game::switched()->count() * 100;
+        $win_percent             = self::percent(Game::stayed()          ->count(), $played_game_count);
+        $stay_percent            = self::percent(Game::switched()        ->count(), $played_game_count);
+        $switch_percent          = self::percent(Game::wins()            ->count(), $played_game_count);
+        $win_percent_of_stayed   = self::percent(Game::stayed()  ->wins()->count(), Game::stayed()  ->count());
+        $win_percent_of_switched = self::percent(Game::switched()->wins()->count(), Game::switched()->count());
         return view('games.index')->with(compact([
             'played_game_count',
             'win_percent',
@@ -23,6 +23,13 @@ class GamesController extends Controller {
             'win_percent_of_stayed',
             'win_percent_of_switched',
         ]));
+    }
+
+    protected static function percent($a, $b) {
+        if ($b === 0) {
+            return 0;
+        }
+        return $a / $b * 100;
     }
 
     public function create() {
