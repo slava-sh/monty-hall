@@ -1,8 +1,6 @@
 body {
     font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
     font-size: 100%;
-    /* font-weight: 500; /* FIXME */
-    line-height: 1;
 }
 
 p, table {
@@ -11,7 +9,7 @@ p, table {
 
 td {
     text-align: left;
-    padding-right: 0.4em;
+    padding-right: 0.3em; // a space
     padding-top: 0.5em;
     tr:first-child & {
         padding-top: 0;
@@ -23,14 +21,16 @@ button,
 input[type="submit"] {
     &,
     &:visited {
+        display: inline-block;
         text-decoration: none;
         background: transparent;
         color: #000;
         font-weight: bold;
+        text-align: center;
+        vertical-align: middle;
         border: 4px solid #000;
         border-radius: 2px;
         padding: 4px 8px;
-        margin: -8px 0;
         margin-right: 10px;
     }
 
@@ -46,21 +46,52 @@ input[type="submit"] {
 .container {
     width: 768px;
     margin: 50px auto 0;
+}
 
-    #page-games-show &:after {
+#page-games-show .container:after {
+    content: "";
+    display: block;
+    position: absolute;
+    left: 0;
+    right: 0;
+    z-index: -1;
+    border-top: 4px solid #000;
+    margin-top: -4px;
+}
+
+#page-games-index .statistics {
+    margin-top: 3em;
+}
+
+#game-head {
+    height: 8em;
+    margin-bottom: 2.25em;
+    display: flex;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+
+    &:before {
         content: "";
-        display: block;
-        position: absolute;
-        left: 0;
-        right: 0;
-        z-index: -1;
-        border-top: 4px solid #000;
-        margin-top: -4px;
+        flex-grow: 1;
     }
 
-    #page-games-index & {
-        margin-top: 130px;
+    & > * {
+        flex-grow: 0;
+        width: 100%;
     }
+
+    p {
+        font-weight: 500;
+    }
+
+    h1 {
+        margin-bottom: 0.5rem;
+    }
+}
+
+#game-message {
+    padding-bottom: 0.5em;
 }
 
 form.new-game {
@@ -68,7 +99,6 @@ form.new-game {
 }
 
 .door-container {
-    margin-top: 3em;
     margin-left: -39px;
     display: flex;
 }
@@ -85,8 +115,4 @@ form.new-game {
         margin-top: -4px;
         background-color: #fff;
     }
-}
-
-#page-games-index .statistics {
-    margin-top: 3em;
 }
