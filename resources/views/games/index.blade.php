@@ -1,4 +1,4 @@
-@extends('app')
+@extends('layouts.master')
 
 @section('title', 'Monty Hall Game')
 
@@ -14,5 +14,4 @@
             <tr><td><strong>Switchers</strong></td><td>win in <strong>{{ sprintf('%.0f', $switch_win_rate) }}%</strong> of cases.</td></tr>
         </table>
     </div>
-
 @stop

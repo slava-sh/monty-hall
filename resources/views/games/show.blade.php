@@ -1,4 +1,4 @@
-@extends('games.layout')
+@extends('layouts.game')
 
 @section('title')
     @if (is_null($game->final_choice) && is_null($game->initial_choice))

@@ -1,7 +1,7 @@
-@extends('app')
+@extends('layouts.master')
 
 @section('title')
-@yield('message', 'Page not found.')
+    @yield('message', 'Page not found.')
 @stop
 
 @section('content')
