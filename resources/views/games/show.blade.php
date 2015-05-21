@@ -29,7 +29,7 @@
             <div class="door-container">
                 @foreach ($doors as $door)
                     <label class="door">
-                        <img alt="Door {{ $door->number }}" src="{{ $door->image }}">
+                        <img alt="Door {{ $door->number }} ({{ $door->state }})" src="{{ $door->image }}">
                         <input type="radio" name="door" value="{{ $door->number }}"
                             {{ $door->number === $game->revealed_door  ? 'disabled' : '' }}
                             {{ $door->number === $game->initial_choice ? 'checked'  : '' }}>
@@ -48,7 +48,7 @@
         <div class="door-container">
             @foreach ($doors as $door)
                 <div class="door">
-                    <img alt="Door {{ $door->number }}" src="{{ $door->image }}">
+                    <img alt="Door {{ $door->number }} ({{ $door->state }})" src="{{ $door->image }}">
                 </div>
             @endforeach
         </div>

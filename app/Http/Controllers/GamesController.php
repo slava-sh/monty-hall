@@ -51,6 +51,7 @@ class GamesController extends Controller {
             }
             $doors[] = (object) [
                 'number' => $i,
+                'state'  => $door_state,
                 'image'  => asset('img/door-' . $door_state . '.svg'),
             ];
         }
