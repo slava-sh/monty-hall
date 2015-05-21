@@ -1,5 +1,19 @@
 @extends('app')
 
+@if (is_null($game->final_choice))
+    @if (is_null($game->initial_choice))
+        @section('title', 'Choose a door')
+    @else
+        @section('title', 'Stay or switch?')
+    @endif
+@else
+    @if ($game->final_choice === $game->prize_door)
+        @section('title', 'You win!')
+    @else
+        @section('title', 'You lose!')
+    @endif
+@endif
+
 @section('content')
     @if (is_null($game->final_choice))
         @if (is_null($game->initial_choice))
@@ -28,11 +42,7 @@
             @endforeach
         </form>
     @else
-        @if ($game->final_choice === $game->prize_door)
-            <h1>You win!</h1>
-        @else
-            <h1>You lose!</h1>
-        @endif
+        <h1>@yield('title')</h1>
         @include('games.new-game-button', ['title' => 'Play Again'])
         <a href="{{ route('games.index') }}">Home</a>
         <div class="door-container">

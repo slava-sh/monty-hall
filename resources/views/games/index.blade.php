@@ -1,5 +1,7 @@
 @extends('app')
 
+@section('title', 'Monty Hall Game')
+
 @section('content')
 
 <!--
