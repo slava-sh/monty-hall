@@ -1,5 +1,6 @@
 <?php namespace App;
 
+use Hashids;
 use Illuminate\Database\Eloquent\Model;
 
 class Game extends Model {
@@ -15,11 +16,11 @@ class Game extends Model {
         parent::boot();
 
         static::creating(function($game) {
-            $game->prize_door = rand(1, 3);
+            $game->generatePrizeDoor();
         });
 
         static::created(function($game) {
-            $game->slug = \Hashids::encode($game->id);
+            $game->slug = Hashids::encode($game->id);
             $game->save();
         });
     }
@@ -56,20 +57,25 @@ class Game extends Model {
         return $query->finished()->whereRaw('final_choice != prize_door');
     }
 
-    /*
-     * Does not validate the input.
-     */
     public function choose($door) {
         $door = (int) $door;
         if (is_null($this->initial_choice)) {
             $this->initial_choice = $door;
-            $this->revealed_door = collect(range(1, 3))->filter(function($door) {
-                return $door !== $this->prize_door &&
-                       $door !== $this->initial_choice;
-            })->random();
+            $this->generateRevealedDoor();
         }
         else if (is_null($this->final_choice)) {
             $this->final_choice = $door;
         }
+    }
+
+    protected function generatePrizeDoor() {
+        $this->prize_door = rand(1, 3);
+    }
+
+    protected function generateRevealedDoor() {
+        $this->revealed_door = collect(range(1, 3))->filter(function($door) {
+            return $door !== $this->prize_door &&
+                   $door !== $this->initial_choice;
+        })->random();
     }
 }

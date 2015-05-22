@@ -1,7 +1,7 @@
 <?php namespace App\Http\Controllers;
 
 use App\Game;
-use App\Http\Requests;
+use App\Http\Requests\ChooseDoorRequest;
 use App\Http\Controllers\Controller;
 
 use Illuminate\Http\Request;
@@ -51,18 +51,11 @@ class GamesController extends Controller {
                 'image'  => asset('img/door-' . $door_state . '.svg'),
             ];
         }
-        $game->testzzz = true;
         return view('games.show')->with(compact('game', 'doors'));
     }
 
-    public function update($game, Request $request) {
-        $pickable_doors = collect(range(1, 3))->filter(function($door) use ($game) {
-            return $door !== $game->revealed_door;
-        });
-        $this->validate($request, [
-            'door' => 'required|in:' . $pickable_doors->implode(','),
-        ]);
-        $game->choose($request->input('door'));
+    public function update($game, ChooseDoorRequest $request) {
+        $game->choose($request->door);
         $game->save();
         return redirect()->route('games.show', $game);
     }

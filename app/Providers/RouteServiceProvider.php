@@ -1,5 +1,8 @@
 <?php namespace App\Providers;
 
+use App\Game;
+use StatusCode;
+
 use Illuminate\Routing\Router;
 use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
 
@@ -24,10 +27,10 @@ class RouteServiceProvider extends ServiceProvider {
         parent::boot($router);
 
         $this->bind('game', function($slug) {
-            if ($game = \App\Game::findBySlug($slug)) {
+            if ($game = Game::findBySlug($slug)) {
                 return $game;
             }
-            abort(\StatusCode::HTTP_NOT_FOUND);
+            abort(StatusCode::HTTP_NOT_FOUND);
         });
     }
 
