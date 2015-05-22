@@ -1,6 +1,6 @@
 <?php namespace App\Http\Controllers;
 
-use App\Game;
+use App\Models\Game;
 use App\Http\Requests\ChooseDoorRequest;
 use App\Http\Controllers\Controller;
 

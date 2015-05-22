@@ -1,6 +1,6 @@
 <?php
 
-use App\Game;
+use App\Models\Game;
 
 use Illuminate\Database\Seeder;
 use Illuminate\Database\Eloquent\Model;

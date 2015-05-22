@@ -1,4 +1,4 @@
-<?php namespace App;
+<?php namespace App\Models;
 
 use Hashids;
 use Illuminate\Database\Eloquent\Model;

@@ -1,6 +1,6 @@
 <?php namespace App\Providers;
 
-use App\Game;
+use App\Models\Game;
 use StatusCode;
 
 use Illuminate\Routing\Router;
