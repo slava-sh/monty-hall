@@ -27,7 +27,7 @@ class RouteServiceProvider extends ServiceProvider {
             if ($game = \App\Game::findBySlug($slug)) {
                 return $game;
             }
-            abort(404);
+            abort(\StatusCode::HTTP_NOT_FOUND);
         });
     }
 

@@ -1,11 +1,10 @@
 @extends('layouts.master')
 
-@section('title')
-    @yield('message', 'Page not found.')
-@stop
+@section('title', $message)
 
 @section('content')
-    <!-- @yield('status') -->
-    <p>@yield('title')</p>
+
+    <!-- {{ $status }} -->
+    <p>{{ $message }}</p>
     <button onclick="window.history.back()">Back</button>
 @stop

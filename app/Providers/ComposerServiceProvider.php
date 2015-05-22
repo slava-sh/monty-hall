@@ -8,8 +8,9 @@ class ComposerServiceProvider extends ServiceProvider {
 
     public function boot() {
         View::composer('*', function($view) {
-            $page_id = 'page-' . str_replace('.', '-', Route::currentRouteName());
-            $view->withPageId($page_id);
+            $route   = Route::currentRouteName() ?: 'error';
+            $page_id = 'page-' . str_replace('.', '-', $route);
+            $view->with(compact('route', 'page_id'));
         });
     }
 

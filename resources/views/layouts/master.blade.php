@@ -11,7 +11,7 @@
     <div class="container">@yield('content')</div>
     <script src="{{ elixir('js/app.js') }}"></script>
     <script>
-        App.init({!! json_encode(Route::currentRouteName()) !!});
+        App.init({!! json_encode($route) !!});
     </script>
 </body>
 </html>
