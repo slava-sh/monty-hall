@@ -40,6 +40,7 @@
         @else
             @include('games.new-game-button', ['title' => 'Try Again'])
         @endif
+        <a href="https://www.facebook.com/sharer/sharer.php?u={{ url('/') }}">Share</a>
         <a href="{{ route('games.index') }}">Statistics</a>
     @endif
 @stop

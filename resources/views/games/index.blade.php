@@ -4,6 +4,9 @@
 
 @section('game.buttons')
     @include('games.new-game-button', ['title' => 'Play'])
+    @if ($user_has_played_a_game)
+        <a href="https://www.facebook.com/sharer/sharer.php?u={{ url('/') }}">Share</a>
+    @endif
 @stop
 
 @section('game.body')
