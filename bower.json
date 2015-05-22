@@ -1,4 +1,6 @@
 {
   "name": "monty-hall",
-  "dependencies": {}
+  "dependencies": {
+    "normalize.css": "~3.0.3"
+  }
 }
