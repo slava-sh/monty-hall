@@ -17,13 +17,17 @@
 @section('game.message')
     @if (is_null($game->final_choice) && is_null($game->initial_choice))
         <p>There are three doors.</p>
-        <p>Only one of them is the winning door.</p>
+        <p>I've hidden a prize behind one of them.</p>
         <p>Choose a door.</p>
     @elseif (is_null($game->final_choice))
-        <p>I opened one losing door for you.</p>
-        <p>Now you can either stay with your choice or switch.</p>
+        <p>I opened one empty door for you.</p>
+        <p>You can keep your choice or switch.</p>
     @else
-        <h1>@yield('title')</h1>
+        @if ($game->final_choice === $game->prize_door)
+            <p>You win the prize!</p>
+        @else
+            <p>Empty!</p>
+        @endif
     @endif
 @stop
 
@@ -31,7 +35,11 @@
     @if (is_null($game->final_choice) && is_null($game->initial_choice))
     @elseif (is_null($game->final_choice))
     @else
-        @include('games.new-game-button', ['title' => 'Play Again'])
+        @if ($game->final_choice === $game->prize_door)
+            @include('games.new-game-button', ['title' => 'Play Again'])
+        @else
+            @include('games.new-game-button', ['title' => 'Try Again'])
+        @endif
         <a href="{{ route('games.index') }}">Statistics</a>
     @endif
 @stop
