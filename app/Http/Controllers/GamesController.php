@@ -10,9 +10,9 @@ class GamesController extends Controller {
 
     public function index() {
         $played_game_count = Game::finished()->count();
-        $switch_rate       = self::percent(Game::wins()            ->count(), $played_game_count);
-        $stay_win_rate     = self::percent(Game::stayed()  ->wins()->count(), Game::stayed()  ->count());
-        $switch_win_rate   = self::percent(Game::switched()->wins()->count(), Game::switched()->count());
+        $switch_rate       = static::percent(Game::wins()            ->count(), $played_game_count);
+        $stay_win_rate     = static::percent(Game::stayed()  ->wins()->count(), Game::stayed()  ->count());
+        $switch_win_rate   = static::percent(Game::switched()->wins()->count(), Game::switched()->count());
         return view('games.index')->with(compact([
             'played_game_count',
             'switch_rate',
