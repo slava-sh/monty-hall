@@ -47,8 +47,12 @@ input[type="submit"] {
     }
 }
 
+img {
+    display: block;
+}
+
 .container {
-    width: 650px; // door image width * 3 - empty vertical space in the image
+    width: 650px;
     margin: 50px auto 0;
 }
 
@@ -95,13 +99,18 @@ form.new-game {
 }
 
 .door-container {
-    margin: 0 -38px;
     display: flex;
 }
 
 .door {
-    img {
-        display: block;
+    margin: 0 38px;
+
+    &:first-child {
+        margin-left: 0;
+    }
+
+    &:last-child {
+        margin-right: 0;
     }
 
     &:after {

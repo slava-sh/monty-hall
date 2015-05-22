@@ -11,7 +11,6 @@ inner_w           = 130
 inner_h           = 280
 padding_h         = 16
 padding_v         = 16
-vertical_space    = 40
 handle_relative_x = 14
 handle_relative_y = inner_h / 2
 handle_size       = 30
@@ -20,7 +19,7 @@ open_inner_crack  = 10
 open_handle_x     = 7
 
 half_stroke = 2
-center_x    = inner_w / 2 + padding_v + vertical_space
+center_x    = inner_w / 2 + padding_v + half_stroke
 ground_w    = center_x * 2
 inner_x     = center_x - inner_w / 2
 inner_y     = padding_v + half_stroke
@@ -89,8 +88,8 @@ for state in ['closed', 'win', 'lose']:
 
     dwg.add(door)
 
-    # ground
-    dwg.add(dwg.line((0, ground_y), (vertical_space, ground_y)))
-    dwg.add(dwg.line((ground_w - vertical_space, ground_y), (ground_w, ground_y)))
+    # sharp ground corners
+    dwg.add(dwg.line((0, ground_y), (padding_h, ground_y)))
+    dwg.add(dwg.line((ground_w - padding_h, ground_y), (ground_w, ground_y)))
 
     dwg.saveas('{}/door-{}.svg'.format(directory, state))
