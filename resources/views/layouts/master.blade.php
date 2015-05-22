@@ -13,5 +13,6 @@
     <script>
         App.init({!! json_encode($route) !!});
     </script>
+    @include('widgets.analytics')
 </body>
 </html>
