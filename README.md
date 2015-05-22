@@ -2,7 +2,7 @@
 
 Game web app
 
-![Screenshot](https://cloud.githubusercontent.com/assets/470136/7749801/c0a2400c-ffd8-11e4-8069-0858835cc45a.png)
+![Screenshot](https://cloud.githubusercontent.com/assets/470136/7775856/5f4cb9c6-00bf-11e5-8e2f-5ee0c84dea73.png)
 
 ### Set up
 
