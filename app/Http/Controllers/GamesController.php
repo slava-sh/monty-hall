@@ -61,7 +61,7 @@ class GamesController extends Controller {
         $game->choose($request->door);
         $game->save();
         if (!is_null($game->final_choice)) {
-            Session::set('user_has_played_a_game', true);
+            Session::put('user_has_played_a_game', true);
         }
         return redirect()->route('games.show', $game);
     }

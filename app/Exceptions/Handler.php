@@ -1,49 +1,48 @@
-<?php namespace App\Exceptions;
+<?php
+
+namespace App\Exceptions;
 
 use StatusCode;
-use Exception;
-use Symfony\Component\HttpKernel\Exception\HttpException;
-use Illuminate\Session\TokenMismatchException;
+use Symfony\Component\HttpKernel\Exception\HttpExceptionInterface;
+
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
+use Throwable;
 
-class Handler extends ExceptionHandler {
-
+class Handler extends ExceptionHandler
+{
     /**
-     * A list of the exception types that should not be reported.
+     * A list of the exception types that are not reported.
      *
      * @var array
      */
     protected $dontReport = [
-        'Symfony\Component\HttpKernel\Exception\HttpException',
+        //
     ];
 
     /**
-     * Report or log an exception.
+     * A list of the inputs that are never flashed for validation exceptions.
      *
-     * This is a great spot to send exceptions to Sentry, Bugsnag, etc.
-     *
-     * @param  \Exception  $e
-     * @return void
+     * @var array
      */
-    public function report(Exception $e) {
-        return parent::report($e);
-    }
+    protected $dontFlash = [
+        'current_password',
+        'password',
+        'password_confirmation',
+    ];
 
     /**
-     * Render an exception into an HTTP response.
+     * Register the exception handling callbacks for the application.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \Exception  $e
-     * @return \Illuminate\Http\Response
+     * @return void
      */
-    public function render($request, Exception $e) {
-        if ($e instanceof TokenMismatchException) {
-            abort(StatusCode::HTTP_UNPROCESSABLE_ENTITY);
-        }
-        return parent::render($request, $e);
+    public function register()
+    {
+        $this->reportable(function (Throwable $e) {
+            //
+        });
     }
 
-    public function renderHttpException(HttpException $e) {
+    public function renderHttpException(HttpExceptionInterface $e) {
         $status = $e->getStatusCode();
         if (400 <= $status && $status < 500) {
             $message = $e->getMessage() ?: StatusCode::$statusTexts[$status];

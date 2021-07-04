@@ -21,20 +21,11 @@ class GenerateDoorImages extends Command {
     protected $description = 'Generate door images.';
 
     /**
-     * Create a new command instance.
-     *
-     * @return void
-     */
-    public function __construct() {
-        parent::__construct();
-    }
-
-    /**
      * Execute the console command.
      *
      * @return mixed
      */
-    public function fire() {
+    public function handle() {
         $script_path = app_path() . '/Console/Commands/generate-door-images.py';
         $img_path    = public_path() . '/img';
         system("python3 $script_path $img_path", $error);
@@ -44,23 +35,5 @@ class GenerateDoorImages extends Command {
         else {
             $this->error('Something went wrong!');
         }
-    }
-
-    /**
-     * Get the console command arguments.
-     *
-     * @return array
-     */
-    protected function getArguments() {
-        return [];
-    }
-
-    /**
-     * Get the console command options.
-     *
-     * @return array
-     */
-    protected function getOptions() {
-        return [];
     }
 }

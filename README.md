@@ -6,12 +6,9 @@ Game web app
 
 ### Set up
 
-Install Vagrant.
-
 ```bash
-git clone https://github.com/slava-sh/monty-hall.git
-cd monty-hall
-vagrant up
+./vendor/bin/sail up
+./vendor/bin/sail npm install
+./vendor/bin/sail npm run production
+./vendor/bin/sail artisan migrate
 ```
-
-The app will be running on http://192.168.56.90/.
