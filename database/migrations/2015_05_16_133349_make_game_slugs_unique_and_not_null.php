@@ -13,10 +13,10 @@ class MakeGameSlugsUniqueAndNotNull extends Migration {
     public function up() {
         DB::table('games')
             ->whereNull('slug')
-            ->update(['slug' => DB::raw('concat("game-", id)')]);
+            ->update(['slug' => DB::raw("concat('game-', id)")]);
 
         // Set case-sensitive collation.
-        DB::statement('ALTER TABLE games MODIFY slug VARCHAR(255) CHARACTER SET ascii COLLATE ascii_bin');
+        //DB::statement('ALTER TABLE games MODIFY slug VARCHAR(255) CHARACTER SET ascii COLLATE ascii_bin');
         Schema::table('games', function(Blueprint $table) {
             $table->string('slug')->unique()->change();
         });
